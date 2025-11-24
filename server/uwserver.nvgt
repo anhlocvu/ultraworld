@@ -1,4 +1,5 @@
 string[] devs = {"patricus", "kannadiga"};
+dictionary authenticated_peers;
 const string sndtype = ".ogg";
 #pragma asset "rules"
 #pragma asset "readme.txt"
@@ -957,6 +958,7 @@ msgs.insert_last("contribute to our game at: https://github.com/amirmahdifard/ul
 	}
 	while ((e = n.request()).type != event_none) {
 		if (e.type == event_disconnect) {
+			authenticated_peers.delete(e.peer_id + "");
 			int index = get_player_index(e.peer_id);
 			if (index > -1) {
 				n.disconnect_peer_softly(players[index].peer_id);
@@ -1350,6 +1352,17 @@ msgs.insert_last("contribute to our game at: https://github.com/amirmahdifard/ul
 					if (index > -1)
 						send_reliable(players[index], "pong", 0);
 				} else if (parsed[0] == "newplayer" and parsed.length() > 7) {
+					string authenticated_username;
+					if (!authenticated_peers.get(e.peer_id + "", authenticated_username)) {
+						send_reliable(e.peer_id, "block Not authenticated", 0);
+						n.disconnect_peer_softly(e.peer_id);
+						return;
+					}
+					if (authenticated_username != parsed[5]) {
+						send_reliable(e.peer_id, "block Username mismatch", 0);
+						n.disconnect_peer_softly(e.peer_id);
+						return;
+					}
 					int hide = string_to_number(get_char_val(parsed[5], "hidden"));
 					calendar d;
 					writeto(parsed[5], "data", "", "lastseen", join({d.year, d.month, d.day, d.hour, d.minute, d.second}, "/"));
@@ -2448,6 +2461,7 @@ void login(string u, string p, string yv, uint id, string compid, string node_id
 				calendar d;
 				writeto(u, "data", "", "lastseen", join({d.year, d.month, d.day, d.hour, d.minute, d.second}, "/"));
 				log("connections", u + " logged in.", true, true);
+				authenticated_peers.set(id + "", u);
 				send_reliable(id, "loggedin", 0);
 			}
 		}
