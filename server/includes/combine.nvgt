@@ -160,17 +160,13 @@ void combine(player@p, string message) {
 				p.health -= random(100, 140);
 			}
 		}
-		/*
-		else if(lefthand=="long_knife" and righthand=="" or lefthand=="" and righthand=="long_knife")
+		else if(lefthand=="" and righthand=="" or lefthand=="" and righthand=="")
 		{
 		if(p.waitingtimer.elapsed>=100 )
 		{
-		send_packet(6,"play handslice.ogg "+p.x+" "+p.y+" "+p.z, p.x,p.y,p.z,maps[get_map_index(p.map)]);
-		send_packet(6,"play v"+string_to_number(p.voice)+"hit"+random(1,5)+".ogg "+p.x+" "+p.y+" "+p.z,p.x,p.y,p.z,maps[get_map_index(p.map)]);
-		p.health-=random(210,240);
+		send_packet(6,"play clap.ogg "+p.x+" "+p.y+" "+p.z, p.x,p.y,p.z,maps[get_map_index(p.map)]);
 		}
 		}
-		*/
 		/*
 		else if(lefthand=="glass" and righthand=="" or lefthand=="" and righthand=="glass")
 		{

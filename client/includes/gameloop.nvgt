@@ -885,39 +885,8 @@ void gameloop() {
 	}
 	if (looking == false and sleepmode != 0) {
 		if (key_up(KEY_LMENU) and key_up(KEY_RMENU) and key_up(KEY_LSHIFT) and key_up(KEY_RSHIFT) and key_pressed(KEY_T) and key_up(KEY_G) and sleepmode != 0) {
-			if (lefthand == "" and righthand == "") {
-				if (clapped.elapsed >= clap) {
-					clapped.restart();
-					if (get_tile_at(me.x, me.y, me.z) == "underwater") {
-						rvp.play_stationary("underwaterclap.ogg", false);
-						send_reliable(peer_id, "draw underwaterclap.ogg", 7);
-						return;
-					} else {
-						rvp.play_stationary("clap.ogg", false);
-						send_reliable(peer_id, "draw clap.ogg", 7);
-						return;
-					}
-				}
-			} else if (usetimer.elapsed > 500) {
-				usetimer.restart();
-				send_reliable(peer_id, "combine (" + lefthand + ") (" + righthand + ")", 5);
-				return;
-			}
+			send_reliable(peer_id, "combine (" + lefthand + ") (" + righthand + ")", 5);
 			return;
-		}
-		if (alt_is_down() and key_up(KEY_LSHIFT) and key_up(KEY_RSHIFT) and key_pressed(KEY_T) and key_up(KEY_G)) {
-			if (lefthand == "" and righthand == "") {
-				if (snapped.elapsed >= snap) {
-					snapped.restart();
-					if (get_tile_at(me.x, me.y, me.z) == "underwater") {
-						rvp.play_stationary("underwaterclap.ogg", false);
-						send_reliable(peer_id, "draw underwaterclap.ogg", 7);
-					} else {
-						rvp.play_stationary("snap.ogg", false);
-						send_reliable(peer_id, "draw snap.ogg", 7);
-					}
-				}
-			}
 		}
 	}
 	if (key_pressed(KEY_J) and key_up(KEY_LSHIFT) and key_up(KEY_RSHIFT) and key_up(KEY_LMENU) and key_up(KEY_RMENU))
