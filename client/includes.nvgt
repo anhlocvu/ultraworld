@@ -1,4 +1,5 @@
 #include "includes/inv.nvgt"
+#include "includes/chat.nvgt"
 #include "includes/input.nvgt"
 #include "application.nvgt"
 #include "includes/multiversion.nvgt"
