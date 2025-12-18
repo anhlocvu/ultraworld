@@ -27,7 +27,7 @@ void build_menu(player@ p) {
 	a.add("door", "door");
 	if (p.admin) a.add("travelpoint", "travelpoint");
 	a.add("safe zone", "safezone");
-	if (p.admin) a.add("fishing coordinate", "fishingcoordinate");
+	a.add("fishing coordinate", "fishingcoordinate");
 	a.add("starting_point", "starting_point");
 	a.add("deathpoint", "deathpoint");
 	a.add("sign", "sign");
