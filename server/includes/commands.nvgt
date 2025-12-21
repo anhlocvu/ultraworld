@@ -1902,7 +1902,7 @@ menu.send(p.peer_id);
 		} else {
 			send_reliable(e.peer_id, "player not found.", 2);
 		}
-	} else if (parsed[0] == "/unjail" and parsed.length() > 1 and p.is_admin() == true) {
+	} else if (parsed[0] == "/unjail" and parsed.length() > 1 and p.assistant) {
 		if (p.assistant) {
 			int ind = get_player_index_from(parsed[1]);
 			if (ind > -1) {
